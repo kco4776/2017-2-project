@@ -1,0 +1,7 @@
+#include<stdio.h>#include<stdlib.h>
+char*best movies=(char*)malloc(sizeof(100));
+typedef struct{ int serial number; char name[100]; char sex; int birth[9];}movie;
+typedef struct{ int serial number; char name[100]; char sex; int birth[9];}director;
+typedef struct{ int serial number; char name[100]; char sex; int birth[9];}actor;
+int main(){ FILE *movie_log=fopen("movie_log.txt","rt"); FILE *movie_list=fopen("movie_list.txt","rt"); FILE *director_log=fopen("director_log.txt","rt"); FILE *director_list=fopen("director_list.txt","rt"); FILE *actor_log=fopen("actor_log.txt","rt"); FILE *actor_list=fopen("actor_list.txt","rt");  printf(">> Welcome to My Movie <<\n"); sleep(1); printf("File loading.....\n"); sleep(1); printf("You can use add, update, delete, search, sort, save, end commands\n"); printf("(movie)"); 
+}
