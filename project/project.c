@@ -6,9 +6,9 @@ int main(void) {
   int actor_serial = 1;
   link *data;
   data = (link *)malloc(sizeof(link));
-  data->movie = NULL;
-  data->actor = NULL;
-  data->director = NULL;
+  data->mv = NULL;
+  data->act = NULL;
+  data->dir = NULL;
 
   char *command;
   command = (char *)calloc(100, sizeof(char));
