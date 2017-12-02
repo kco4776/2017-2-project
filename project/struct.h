@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+typedef struct movie {
+  int serial;
+  char *title;
+  char *genre;
+  struct director_p *mv_dir;
+  int year;
+  int time;
+  struct actor_p *mv_act;
+  struct movie *next;
+} movie;
+
+typedef struct actor {
+  int serial;
+  char *name;
+  char sex;
+  char *birth;
+  struct movie_p *best;
+  struct actor *next;
+} actor;
+
+typedef struct director {
+  int serial;
+  char *name;
+  char sex;
+  char *birth;
+  struct movie_p *best;
+  struct director *next;
+} director;
+
+typedef struct movie_p {
+  char *title;
+  struct movie *mv_p;
+  struct movie_p *next;
+} movie_p;
+
+typedef struct actor_p {
+  char *name;
+  struct actor *act_p;
+  struct actor_p *next;
+} actor_p;
+
+typedef struct director_p {
+  char *name;
+  struct director *dir_p;
+} director_p;
+
+typedef struct link {
+  struct movie *mv;
+  struct actor *act;
+  struct director *dir;
+}
+
+void init_movie(link *data);
+void add_m(int serial);
+void add_d(int serial);
+void add_a(int serial);
+char *delete_null(char *string);
+char *get_data(char *p);
