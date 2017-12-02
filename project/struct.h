@@ -52,7 +52,7 @@ typedef struct link {
   struct movie *mv;
   struct actor *act;
   struct director *dir;
-}
+} link;
 
 void init_movie(link *data);
 void add_m(int serial);
