@@ -7,8 +7,8 @@ typedef struct movie {
   char *title;
   char *genre;
   struct director_p *mv_dir;
-  int year;
-  int time;
+  char *year;
+  char *time;
   struct actor_p *mv_act;
   struct movie *next;
 } movie;
@@ -55,6 +55,7 @@ typedef struct link {
 } link;
 
 void init_movie(link *data);
+void add_actorp(actor_p *mv_act, char *actor);
 void add_m(int serial);
 void add_d(int serial);
 void add_a(int serial);
