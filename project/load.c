@@ -200,6 +200,7 @@ void link_data(link *data) {
   actor *tmp_a = data->act;
   director *tmp_d = data->dir;
   actor_p *tmp_ap;
+  movie_p *tmp_mp;
 
   while(tmp_m != NULL) {
     while(tmp_d != NULL) {
@@ -227,6 +228,42 @@ void link_data(link *data) {
       tmp_ap = tmp_ap->next;
     }
     tmp_m = tmp_m->next;
+  }
+
+  tmp_m = data->mv;
+  tmp_a = data->act;
+  tmp_d = data->dir;
+
+  while(tmp_a != NULL) {
+    tmp_mp = tmp_a->best;
+    while(tmp_mp != NULL) {
+      while(tmp_m != NULL) {
+        if(!strcmp(tmp_mp->title, tmp_m->title))
+          tmp_mp->mv_p = tmp_m;
+
+        tmp_m = tmp_m->next;
+      }
+      tmp_mp = tmp_mp->next;
+    }
+    tmp_a = tmp_a->next;
+  }
+
+  tmp_m = data->mv;
+  tmp_a = data->act;
+  tmp_d = data->dir;
+
+  while(tmp_d != NULL) {
+    tmp_mp = tmp_d->best;
+    while(tmp_mp != NULL) {
+      while(tmp_m != NULL) {
+        if(!strcmp(tmp_mp->title, tmp_m->title))
+          tmp_mp->mv_p = tmp_m;
+
+        tmp_m = tmp_m->next;
+      }
+      tmp_mp = tmp_mp->next;
+    }
+    tmp_d = tmp_d->next;
   }
 
 }
