@@ -17,6 +17,7 @@ int main(void) {
   printf("File Loading.....\n");
   init_movie(data);
   init_director(data);
+  init_actor(data);
   printf("You can use add, update, delete, search, sort, save, end commands.\n");
   do {
     printf("(movie) ");

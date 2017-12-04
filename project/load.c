@@ -111,6 +111,15 @@ void init_director(link *data) {
       while(best_mv = strtok(NULL, ",")) {
         add_moviep(tmp, best_mv);
       }
+      fseek(director_log, 1, SEEK_CUR);
+      free(tag);
+      free(serial);
+      free(best_mv);
+      free(best_mvs);
+      tag = (char *)calloc(10, sizeof(char));
+      serial = (char *)calloc(5, sizeof(char));
+      best_mvs = (char *)calloc(100, sizeof(char));
+      best_mv = (char *)calloc(50, sizeof(char));
     }
 
     else if(!strcmp(tag, "update")) {
@@ -123,6 +132,69 @@ void init_director(link *data) {
 
   }
 }
+
+void init_actor(link *data) {
+  FILE *actor_log = fopen("actor_log", "r");
+  data->act = (actor *)malloc(sizeof(actor));
+  data->act->name = (char *)calloc(50, sizeof(char));
+  data->act->birth = (char *)calloc(10, sizeof(char));
+  data->act->best = (movie_p *)malloc(sizeof(movie_p));
+  data->act->best->title = (char *)calloc(50, sizeof(char));
+  data->act->best->mv_p = NULL;
+  data->act->best->next = NULL;
+  data->act->next = NULL;
+  movie_p *tmp;
+
+  char *tag;
+  tag = (char *)calloc(10, sizeof(char));
+  char *serial;
+  serial = (char *)calloc(5, sizeof(char));
+  char *best_mvs;
+  best_mvs = (char *)calloc(100, sizeof(char));
+  char *best_mv;
+  best_mv = (char *)calloc(50, sizeof(char));
+
+  while(fscanf(actor_log, "%[^:]", tag) != EOF) {
+    fseek(actor_log, 1, SEEK_CUR);
+
+    if(!strcmp(tag, "add")) {
+      fscanf(actor_log, "%[^:]", serial);
+      fseek(actor_log, 1, SEEK_CUR);
+      fscanf(actor_log, "%[^:]", data->act->name);
+      fseek(actor_log, 1, SEEK_CUR);
+      fscanf(actor_log, "%[^:]", &(data->act->sex));
+      fseek(actor_log, 1, SEEK_CUR);
+      fscanf(actor_log, "%[^:]", data->act->birth);
+      fseek(actor_log, 1, SEEK_CUR);
+      fscanf(actor_log, "%[^\n]", best_mvs);
+      best_mv = strtok(best_mvs, ",");
+      data->act->best->title = best_mv;
+      tmp = data->act->best;
+      while(best_mv = strtok(NULL, ",")) {
+        add_moviep(tmp, best_mv);
+      }
+      fseek(actor_log, 1, SEEK_CUR);
+      free(tag);
+      free(serial);
+      free(best_mv);
+      free(best_mvs);
+      tag = (char *)calloc(10, sizeof(char));
+      serial = (char *)calloc(5, sizeof(char));
+      best_mvs = (char *)calloc(100, sizeof(char));
+      best_mv = (char *)calloc(50, sizeof(char));
+    }
+
+    else if(!strcmp(tag, "update")) {
+
+    }
+
+    else if(!strcmp(tag, "delete")) {
+
+    }
+
+  }
+}
+
 
 void add_actorp(actor_p *tmp, char *actor) {
   tmp->next = (actor_p *)malloc(sizeof(actor_p));
