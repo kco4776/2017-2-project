@@ -195,6 +195,41 @@ void init_actor(link *data) {
   }
 }
 
+void link_data(link *data) {
+  movie *tmp_m = data->mv;
+  actor *tmp_a = data->act;
+  director *tmp_d = data->dir;
+  actor_p *tmp_ap;
+
+  while(tmp_m != NULL) {
+    while(tmp_d != NULL) {
+      if(!strcmp(tmp_m->mv_dir->name, tmp_d->name))
+        tmp_m->mv_dir->dir_p = tmp_d;
+
+      tmp_d = tmp_d->next;
+    }
+    tmp_m = tmp_m->next;
+  }
+
+  tmp_m = data->mv;
+  tmp_a = data->act;
+  tmp_d = data->dir;
+
+  while(tmp_m != NULL) {
+    tmp_ap = tmp_m->mv_act;
+    while(tmp_ap != NULL) {
+      while(tmp_a != NULL) {
+        if(!strcmp(tmp_ap->name, tmp_a->name))
+          tmp_ap->act_p = tmp_a;
+
+        tmp_a = tmp_a->next;
+      }
+      tmp_ap = tmp_ap->next;
+    }
+    tmp_m = tmp_m->next;
+  }
+
+}
 
 void add_actorp(actor_p *tmp, char *actor) {
   tmp->next = (actor_p *)malloc(sizeof(actor_p));
@@ -210,4 +245,11 @@ void add_moviep(movie_p *tmp, char *best_mv) {
   tmp->next->next = NULL;
   tmp->next->title = best_mv;
   tmp = tmp->next;
+}
+
+void loading(link *data) {
+  init_movie(data);
+  init_actor(data);
+  init_director(data);
+  link_data(data);
 }

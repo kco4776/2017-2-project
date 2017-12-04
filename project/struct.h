@@ -59,6 +59,8 @@ void add_actorp(actor_p *mv_act, char *actor);
 void init_director(link *data);
 void add_moviep(movie_p *tmp, char *best_mv);
 void init_actor(link *data);
+void link_data(link *data);
+void loading(link *data);
 void add_m(int serial);
 void add_d(int serial);
 void add_a(int serial);
