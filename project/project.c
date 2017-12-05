@@ -12,6 +12,10 @@ int main(void) {
 
   char *command;
   command = (char *)calloc(100, sizeof(char));
+  char *secondcommand;
+  secondcommand = (char *)calloc(100, sizeof(char));
+  char *tokenstring;
+  tokenstring = (char *)calloc(100, sizeof(char));
 
   printf(">> Welcome to My Movie <<\n");
   printf("File Loading.....\n");
@@ -37,6 +41,42 @@ int main(void) {
       add_a(actor_serial);
       free(command);
       command = (char *)calloc(50, sizeof(char));
+    }
+    else if(!strcmp(secondcommand, "print m")) {
+      tokenstring = strtok(command, " ");
+      tokenstring = strtok(NULL, " ");
+      tokenstring = strtok(NULL, " ");
+      print_m(data, tokenstring);
+      free(command);
+      free(secondcommand);
+      free(tokenstring);
+      command = (char *)calloc(50, sizeof(char));
+      secondcommand = (char *)calloc(100, sizeof(char));
+      tokenstring = (char *)calloc(100, sizeof(char));
+    }
+    else if(!strcmp(secondcommand, "print d")) {
+      tokenstring = strtok(command, " ");
+      tokenstring = strtok(NULL, " ");
+      tokenstring = strtok(NULL, " ");
+      print_d(data, tokenstring);
+      free(command);
+      free(secondcommand);
+      free(tokenstring);
+      command = (char *)calloc(50, sizeof(char));
+      secondcommand = (char *)calloc(100, sizeof(char));
+      tokenstring = (char *)calloc(100, sizeof(char));
+    }
+    else if(!strcmp(secondcommand, "print a")) {
+      tokenstring = strtok(command, " ");
+      tokenstring = strtok(NULL, " ");
+      tokenstring = strtok(NULL, " ");
+      print_a(data, tokenstring);
+      free(command);
+      free(secondcommand);
+      free(tokenstring);
+      command = (char *)calloc(50, sizeof(char));
+      secondcommand = (char *)calloc(100, sizeof(char));
+      tokenstring = (char *)calloc(100, sizeof(char));
     }
   } while(strcmp(command, "end\n"));
 
