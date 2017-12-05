@@ -24,6 +24,7 @@ int main(void) {
   do {
     printf("(movie) ");
     fgets(command, 100, stdin);
+    strncpy(secondcommand, command, 7);
 
     if(!strcmp(command, "add m\n")) {
       add_m(movie_serial);
