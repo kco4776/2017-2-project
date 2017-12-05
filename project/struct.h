@@ -66,3 +66,6 @@ void add_d(int serial);
 void add_a(int serial);
 char *delete_null(char *string);
 char *get_data(char *p);
+void print_m(link *data, char *tokenstring);
+void print_d(link *data, char *tokenstring);
+void print_a(link *data, char *tokenstring);
