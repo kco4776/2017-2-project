@@ -108,10 +108,10 @@ void init_director(link *data) {
       fseek(director_log, 1, SEEK_CUR);
       fscanf(director_log, "%[^\n]", best_mvs);
       best_mv = strtok(best_mvs, ",");
-      data->dir->best->title = best_mv;
+      strcpy(data->dir->best->title, best_mv);
       tmp = data->dir->best;
       while(best_mv = strtok(NULL, ",")) {
-        add_moviep(tmp, best_mv);
+        add_moviep(&tmp, best_mv);
       }
       fseek(director_log, 1, SEEK_CUR);
       free(tag);
@@ -170,10 +170,10 @@ void init_actor(link *data) {
       fseek(actor_log, 1, SEEK_CUR);
       fscanf(actor_log, "%[^\n]", best_mvs);
       best_mv = strtok(best_mvs, ",");
-      data->act->best->title = best_mv;
+      strcpy(data->act->best->title, best_mv);
       tmp = data->act->best;
       while(best_mv = strtok(NULL, ",")) {
-        add_moviep(tmp, best_mv);
+        add_moviep(&tmp, best_mv);
       }
       fseek(actor_log, 1, SEEK_CUR);
       free(tag);
@@ -278,12 +278,12 @@ void add_actorp(actor_p **tmp, char *actor) {
   (*tmp) = (*tmp)->next;
 }
 
-void add_moviep(movie_p *tmp, char *best_mv) {
-  tmp->next = (movie_p *)malloc(sizeof(movie_p));
-  tmp->next->title = (char *)calloc(50, sizeof(char));
-  tmp->next->next = NULL;
-  tmp->next->title = best_mv;
-  tmp = tmp->next;
+void add_moviep(movie_p **tmp, char *best_mv) {
+  (*tmp)->next = (movie_p *)malloc(sizeof(movie_p));
+  (*tmp)->next->title = (char *)calloc(50, sizeof(char));
+  (*tmp)->next->next = NULL;
+  (*tmp)->next->title = best_mv;
+  (*tmp) = (*tmp)->next;
 }
 
 void loading(link *data) {

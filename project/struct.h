@@ -57,7 +57,7 @@ typedef struct link {
 void init_movie(link *data);
 void add_actorp(actor_p **tmp, char *actor);
 void init_director(link *data);
-void add_moviep(movie_p *tmp, char *best_mv);
+void add_moviep(movie_p **tmp, char *best_mv);
 void init_actor(link *data);
 void link_data(link *data);
 void loading(link *data);
