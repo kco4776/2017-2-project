@@ -17,7 +17,7 @@ void print_m(link *data, char *tokenstring){
   //while(checkdata->next!=NULL) {
   //  if (!strcmp(checkdata->name, tmp_m->mv_dir->name))
       printf("D : %s(%s)\n", tmp_m->mv_dir->name, tmp_m->mv_dir->dir_p->birth);
-      printf("1");
+
     //checkdata = checkdata->next;
   //}
   printf("D : %s\n", tmp_m->mv_dir->name);
@@ -31,15 +31,12 @@ void print_m(link *data, char *tokenstring){
 void print_d(link *data, char *tokenstring) {
   movie_p *tmp_mp;
   director *tmp_d = data->dir;
-  printf("1");
   int compare=0,i=1;
   compare = atoi(tokenstring);
   while(tmp_d->serial != compare) {
     tmp_d=tmp_d->next;
   }
-  printf("2");
   tmp_mp = tmp_d->best;
-  printf("3");
   printf("%d, %s, %c, %s\n", compare, tmp_d->name, tmp_d->sex, tmp_d->birth);
   printf("%s, %s, %s\n", tmp_mp->title, tmp_mp->mv_p->year, tmp_mp->mv_p->time);
   while(tmp_mp->next != NULL) {
@@ -64,8 +61,4 @@ void print_a(link *data, char *tokenstring) {
     tmp_mp = tmp_mp->next;
     printf("%s, %s, %s\n", tmp_mp->title, tmp_mp->mv_p->year, tmp_mp->mv_p->time);
   }
-}
-
-void test_print(link *data) {
-  printf("actor1:%s\n", data->mv->mv_act->name);
 }
