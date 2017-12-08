@@ -44,10 +44,10 @@ void init_movie(link *data) {
       fseek(movie_log, 1, SEEK_CUR);
       fscanf(movie_log, "%[^\n]", names);
       name = strtok(names, ",");
-      data->mv->mv_act->name = name;
+      strcpy(data->mv->mv_act->name, name);
       tmp = data->mv->mv_act;
       while(name = strtok(NULL, ",")) {
-        add_actorp(tmp, name);
+        add_actorp(&tmp, name);
       }
       fseek(movie_log, 1, SEEK_CUR);
       free(tag);
@@ -268,12 +268,12 @@ void link_data(link *data) {
 
 }
 
-void add_actorp(actor_p *tmp, char *actor) {
-  tmp->next = (actor_p *)malloc(sizeof(actor_p));
-  tmp->next->name = (char *)calloc(50, sizeof(char));
-  tmp->next->next = NULL;
-  tmp->next->name = actor;
-  tmp = tmp->next;
+void add_actorp(actor_p **tmp, char *actor) {
+  (*tmp)->next = (actor_p *)malloc(sizeof(actor_p));
+  (*tmp)->next->name = (char *)calloc(50, sizeof(char));
+  (*tmp)->next->next = NULL;
+  (*tmp)->next->name = actor;
+  (*tmp) = (*tmp)->next;
 }
 
 void add_moviep(movie_p **tmp, char *best_mv) {
