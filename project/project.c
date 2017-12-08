@@ -54,7 +54,6 @@ int main(void) {
       command = (char *)calloc(50, sizeof(char));
       secondcommand = (char *)calloc(100, sizeof(char));
       tokenstring = (char *)calloc(100, sizeof(char));
-      test_print(data);
     }
     else if(!strcmp(secondcommand, "print d")) {
       tokenstring = strtok(command, " ");

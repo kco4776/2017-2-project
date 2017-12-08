@@ -31,35 +31,38 @@ void print_m(link *data, char *tokenstring){
 void print_d(link *data, char *tokenstring) {
   movie_p *tmp_mp;
   director *tmp_d = data->dir;
-
+  printf("1");
   int compare=0,i=1;
   compare = atoi(tokenstring);
   while(tmp_d->serial != compare) {
     tmp_d=tmp_d->next;
   }
+  printf("2");
   tmp_mp = tmp_d->best;
-  printf("%d, %s, %c, %s\n", compare, data->dir->name, data->dir->sex, data->dir->birth);
-  printf("%s, %s, %s\n", data->dir->best->title, data->dir->best->mv_p->year, data->dir->best->mv_p->time);
-  while(data->dir->best->next != NULL) {
-    data->dir->best = data->dir->best->next;
-    printf("%s, %s, %s\n", data->dir->best->title, data->dir->best->mv_p->year, data->dir->best->mv_p->time);
+  printf("3");
+  printf("%d, %s, %c, %s\n", compare, tmp_d->name, tmp_d->sex, tmp_d->birth);
+  printf("%s, %s, %s\n", tmp_mp->title, tmp_mp->mv_p->year, tmp_mp->mv_p->time);
+  while(tmp_mp->next != NULL) {
+    tmp_mp = tmp_mp->next;
+    printf("%s, %s, %s\n", tmp_mp->title, tmp_mp->mv_p->year, tmp_mp->mv_p->time);
   }
 }
 
 void print_a(link *data, char *tokenstring) {
   movie_p *tmp_mp;
-
+  actor *tmp_a = tmp_a;
 
   int compare=0,i=1;
   compare = atoi(tokenstring);
-  while(data->act->serial != compare) {
-    data->act=data->act->next;
+  while(tmp_a->serial != compare) {
+    tmp_a=tmp_a->next;
   }
-  printf("%d, %s, %c, %s\n", compare, data->act->name, data->act->sex, data->act->birth);
-  printf("%s, %s, %s\n", data->act->best->title, data->act->best->mv_p->year, data->act->best->mv_p->time);
-  while(data->act->best->next != NULL) {
-    data->act->best = data->act->best->next;
-    printf("%s, %s, %s\n", data->act->best->title, data->act->best->mv_p->year, data->act->best->mv_p->time);
+  tmp_mp = tmp_mp;
+  printf("%d, %s, %c, %s\n", compare, tmp_a->name, tmp_a->sex, tmp_a->birth);
+  printf("%s, %s, %s\n", tmp_mp->title, tmp_mp->mv_p->year, tmp_mp->mv_p->time);
+  while(tmp_mp->next != NULL) {
+    tmp_mp = tmp_mp->next;
+    printf("%s, %s, %s\n", tmp_mp->title, tmp_mp->mv_p->year, tmp_mp->mv_p->time);
   }
 }
 
