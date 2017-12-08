@@ -69,3 +69,4 @@ char *get_data(char *p);
 void print_m(link *data, char *tokenstring);
 void print_d(link *data, char *tokenstring);
 void print_a(link *data, char *tokenstring);
+void test_print(link *data);
