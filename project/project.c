@@ -35,6 +35,9 @@ int main(void) {
       free(command);
       command = (char *)calloc(50, sizeof(char));
     }
+    else if(!strncmp(command, "delete m", 8)) {
+      
+    }
   } while(strcmp(command, "end\n"));
 
   return 0;
