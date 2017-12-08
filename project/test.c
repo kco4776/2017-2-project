@@ -3,15 +3,17 @@
 #include <string.h>
 
 int main(void) {
-  char *names;
-  names = (char *)calloc(100, sizeof(char));
-  char *name;
-  name = (char *)calloc(50, sizeof(char));
-  printf("입력:");
-  fgets(names, 100, stdin);
-  printf("names:%s\n", names);
-  name = strtok(names, ",");
-  printf("%s\n", name);
+  char *string;
+  string = (char *)calloc(50, sizeof(char));
+  stringcopy(string);
+  printf("string:%s\n", string);
 
   return 0;
+}
+
+void stringcopy(char *string) {
+  char tmp[50];
+  printf("입력:");
+  scanf("%s", tmp);
+  strcpy(string, tmp);
 }
