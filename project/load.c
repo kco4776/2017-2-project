@@ -97,6 +97,7 @@ void init_director(link *data) {
 
     if(!strcmp(tag, "add")) {
       fscanf(director_log, "%[^:]", serial);
+      data->dir->serial = atoi(serial);
       fseek(director_log, 1, SEEK_CUR);
       fscanf(director_log, "%[^:]", data->dir->name);
       fseek(director_log, 1, SEEK_CUR);
@@ -159,6 +160,7 @@ void init_actor(link *data) {
 
     if(!strcmp(tag, "add")) {
       fscanf(actor_log, "%[^:]", serial);
+      data->act->serial = atoi(serial);
       fseek(actor_log, 1, SEEK_CUR);
       fscanf(actor_log, "%[^:]", data->act->name);
       fseek(actor_log, 1, SEEK_CUR);

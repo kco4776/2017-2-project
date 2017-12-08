@@ -99,6 +99,7 @@ int count_serial(link *data, int mode) {
     while(tmp->next != NULL) {
       tmp = tmp->next;
     }
+    printf("serail:%d\n", tmp->serial);
     return tmp->serial;
   }
   else if(mode == 3) {
