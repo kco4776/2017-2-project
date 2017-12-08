@@ -1,7 +1,6 @@
 #include "struct.h"
 
 void print_m(link *data, char *tokenstring){
-  FILE *movie_list = fopen("movie_list", "r");
   actor_p *tmp_ap;
   movie *tmp_m = data->mv;
 
@@ -21,15 +20,14 @@ void print_m(link *data, char *tokenstring){
     checkdata = checkdata->next;
   }
   printf("D : %s\n", tmp_m->mv_dir->name);
-  printf("A%d : %s()\n", i++, tmp_ap->name); //tmp_ap->act_p->birth);
-  /*while(tmp_ap->next != NULL) {
+  printf("A%d : %s()\n", i++, tmp_ap->name); tmp_ap->act_p->birth);
+  while(tmp_ap->next != NULL) {
     tmp_ap = tmp_ap->next;
     printf("A%d : %s(%s)\n", i++, tmp_ap->name, tmp_ap->act_p->birth);
-  }*/
+  }
 }
 
 void print_d(link *data, char *tokenstring) {
-  FILE *movie_list = fopen("movie_list", "r");
   director_p *tmp_dp;
   director *tmp_d = data->dir;
 
@@ -48,9 +46,7 @@ void print_d(link *data, char *tokenstring) {
 }
 
 void print_a(link *data, char *tokenstring) {
-  FILE *movie_list = fopen("movie_list", "r");
   movie_p *tmp_mp;
-
 
   int compare=0,i=1;
   compare = atoi(tokenstring);
