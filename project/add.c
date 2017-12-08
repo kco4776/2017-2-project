@@ -1,6 +1,6 @@
 #include "struct.h"
 
-void add_m(link *data) {
+void add_m(int serial) {
   FILE *movie_log = fopen("movie_log", "a");
 
   char *string;
