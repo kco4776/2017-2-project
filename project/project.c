@@ -38,11 +38,6 @@ int main(void) {
       free(command);
       command = (char *)calloc(50, sizeof(char));
     }
-    else if(!strcmp(command, "print\n")) {
-      printf("actor1:%s\n", data->mv->mv_act->next->next->name);
-      free(command);
-      command = (char *)calloc(50, sizeof(char));
-    }
   } while(strcmp(command, "end\n"));
 
   return 0;
