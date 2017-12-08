@@ -37,6 +37,7 @@ void print_m(link *data, char *tokenstring){
     printf("A%d : %s(%s)\n", i++, tmp_ap->name, tmp_ap->act_p->birth);
   }*/
 }
+}
 
 void print_d(link *data, char *tokenstring) {
   movie_p *tmp_mp;

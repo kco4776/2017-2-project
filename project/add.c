@@ -1,12 +1,12 @@
 #include "struct.h"
 
-void add_m(int serial) {
+void add_m(link *data) {
   FILE *movie_log = fopen("movie_log", "a");
 
   char *string;
   string = (char *)calloc(100, sizeof(char));
 
-  fprintf(movie_log, "add:%d:", serial);
+  fprintf(movie_log, "add:%d:", count_serial(data, 1)+1);
   printf("title > ");
   fgets(get_data(string), 100, stdin);
   fprintf(movie_log, "%s:", delete_null(string));
@@ -25,16 +25,16 @@ void add_m(int serial) {
   printf("actor > ");
   fgets(get_data(string), 100, stdin);
   fprintf(movie_log, "%s\n", delete_null(string));
-  serial++;
+  loading(data);
 }
 
-void add_d(int serial) {
+void add_d(link *data) {
   FILE *director_log = fopen("director_log", "a");
 
   char *string;
   string = (char *)calloc(100, sizeof(char));
 
-  fprintf(director_log, "add:%d:", serial);
+  fprintf(director_log, "add:%d:", count_serial(data, 2)+1);
   printf("name > ");
   fgets(get_data(string), 100, stdin);
   fprintf(director_log, "%s:", delete_null(string));
@@ -47,16 +47,16 @@ void add_d(int serial) {
   printf("best_movies > ");
   fgets(get_data(string), 100, stdin);
   fprintf(director_log, "%s\n", delete_null(string));
-  serial++;
+  loading(data);
 }
 
-void add_a(int serial) {
+void add_a(link *data) {
   FILE *actor_log = fopen("actor_log", "a");
 
   char *string;
   string = (char *)calloc(100, sizeof(char));
 
-  fprintf(actor_log, "add:%d:", serial);
+  fprintf(actor_log, "add:%d:", count_serial(data, 3));
   printf("name > ");
   fgets(get_data(string), 100, stdin);
   fprintf(actor_log, "%s:", delete_null(string));
@@ -69,7 +69,7 @@ void add_a(int serial) {
   printf("best_movies > ");
   fgets(get_data(string), 100, stdin);
   fprintf(actor_log, "%s\n", delete_null(string));
-  serial++;
+  loading(data);
 }
 
 char *delete_null(char *string) {
@@ -84,4 +84,29 @@ char *get_data(char *p) {
   free(p);
   p = (char *)calloc(100, sizeof(char));
   return p;
+}
+
+int count_serial(link *data, int mode) {
+  if(mode == 1) {
+    movie *tmp = data->mv;
+    while(tmp->next != NULL) {
+      tmp = tmp->next;
+    }
+    return tmp->serial;
+  }
+  else if(mode == 2) {
+    director *tmp = data->dir;
+    while(tmp->next != NULL) {
+      tmp = tmp->next;
+    }
+    return tmp->serial;
+  }
+  else if(mode == 3) {
+    actor *tmp = data->act;
+    while(tmp->next != NULL) {
+      tmp = tmp->next;
+    }
+    return tmp->serial;
+  }
+  return 0;
 }

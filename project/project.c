@@ -1,9 +1,6 @@
 #include "struct.h"
 
 int main(void) {
-  int movie_serial = 1;
-  int director_serial = 1;
-  int actor_serial = 1;
   link *data;
   data = (link *)malloc(sizeof(link));
   data->mv = NULL;
@@ -22,19 +19,19 @@ int main(void) {
     fgets(command, 100, stdin);
 
     if(!strcmp(command, "add m\n")) {
-      add_m(movie_serial);
+      add_m(data);
       free(command);
       command = (char *)calloc(50, sizeof(char));
 
     }
     else if(!strcmp(command, "add d\n")) {
-      add_d(director_serial);
+      add_d(data);
       free(command);
       command = (char *)calloc(50, sizeof(char));
 
     }
     else if(!strcmp(command, "add a\n")) {
-      add_a(actor_serial);
+      add_a(data);
       free(command);
       command = (char *)calloc(50, sizeof(char));
     }
