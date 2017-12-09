@@ -67,3 +67,5 @@ void add_a(link *data);
 char *delete_null(char *string);
 char *get_data(char *p);
 int count_serial(link *data, int mode);
+void print_m(link *data, int num);
+char* birth_check(actor_p *tmp_ap);

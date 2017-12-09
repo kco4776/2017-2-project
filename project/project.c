@@ -35,8 +35,10 @@ int main(void) {
       free(command);
       command = (char *)calloc(50, sizeof(char));
     }
-    else if(!strncmp(command, "delete m", 8)) {
-      
+    else if(!strncmp(command, "print m", 7)) {
+      print_m(data, *(command+8)-48);
+      free(command);
+      command = (char *)calloc(50, sizeof(char));
     }
   } while(strcmp(command, "end\n"));
 
