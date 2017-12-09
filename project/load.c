@@ -51,7 +51,7 @@ void init_movie(link *data) {
         strcpy(data->mv->mv_act->name, name);
         mv_ap = data->mv->mv_act;
         while(name = strtok(NULL, ",")) {
-          add_actorp(&mv_ap, name);
+          add_actorp(&mv_ap, name+1);
         }
         fseek(movie_log, 1, SEEK_CUR);
         free(tag);
@@ -98,7 +98,7 @@ void init_movie(link *data) {
           strcpy(data->mv->next->mv_act->name, name);
           mv_ap = data->mv->next->mv_act;
           while(name = strtok(NULL, ",")) {
-            add_actorp(&mv_ap, name);
+            add_actorp(&mv_ap, name+1);
           }
           fseek(movie_log, 1, SEEK_CUR);
           free(tag);
@@ -148,7 +148,7 @@ void init_movie(link *data) {
             strcpy(tmp_m->next->mv_act->name, name);
             mv_ap = tmp_m->next->mv_act;
             while(name = strtok(NULL, ",")) {
-              add_actorp(&mv_ap, name);
+              add_actorp(&mv_ap, name+1);
             }
             fseek(movie_log, 1, SEEK_CUR);
             free(tag);
@@ -217,7 +217,7 @@ void init_director(link *data) {
         strcpy(data->dir->best->title, best_mv);
         tmp_mp = data->dir->best;
         while(best_mv = strtok(NULL, ",")) {
-          add_moviep(&tmp_mp, best_mv);
+          add_moviep(&tmp_mp, best_mv+1);
         }
         fseek(director_log, 1, SEEK_CUR);
         free(tag);
@@ -255,7 +255,7 @@ void init_director(link *data) {
           strcpy(data->dir->next->best->title, best_mv);
           tmp_mp = data->dir->next->best;
           while(best_mv = strtok(NULL, ",")) {
-            add_moviep(&tmp_mp, best_mv);
+            add_moviep(&tmp_mp, best_mv+1);
           }
           fseek(director_log, 1, SEEK_CUR);
           free(tag);
@@ -295,7 +295,7 @@ void init_director(link *data) {
             strcpy(tmp_d->next->best->title, best_mv);
             tmp_mp = tmp_d->next->best;
             while(best_mv = strtok(NULL, ",")) {
-              add_moviep(&tmp_mp, best_mv);
+              add_moviep(&tmp_mp, best_mv+1);
             }
             fseek(director_log, 1, SEEK_CUR);
             free(tag);
@@ -363,7 +363,7 @@ void init_actor(link *data) {
         strcpy(data->act->best->title, best_mv);
         tmp_mp = data->act->best;
         while(best_mv = strtok(NULL, ",")) {
-          add_moviep(&tmp_mp, best_mv);
+          add_moviep(&tmp_mp, best_mv+1);
         }
         fseek(actor_log, 1, SEEK_CUR);
         free(tag);
@@ -401,7 +401,7 @@ void init_actor(link *data) {
           strcpy(data->act->next->best->title, best_mv);
           tmp_mp = data->act->next->best;
           while(best_mv = strtok(NULL, ",")) {
-            add_moviep(&tmp_mp, best_mv);
+            add_moviep(&tmp_mp, best_mv+1);
           }
           fseek(actor_log, 1, SEEK_CUR);
           free(tag);
@@ -441,7 +441,7 @@ void init_actor(link *data) {
             strcpy(tmp_a->next->best->title, best_mv);
             tmp_mp = tmp_a->next->best;
             while(best_mv = strtok(NULL, ",")) {
-              add_moviep(&tmp_mp, best_mv);
+              add_moviep(&tmp_mp, best_mv+1);
             }
             fseek(actor_log, 1, SEEK_CUR);
             free(tag);
@@ -493,7 +493,7 @@ void link_data(link *data) {
     tmp_ap = tmp_m->mv_act;
     while(tmp_ap != NULL) {
       while(tmp_a != NULL) {
-        if(!strcmp(tmp_ap->name, tmp_a->name))
+        if(!strncmp(tmp_ap->name, tmp_a->name, strlen(tmp_a->name)))
           tmp_ap->act_p = tmp_a;
 
         tmp_a = tmp_a->next;
@@ -512,7 +512,7 @@ void link_data(link *data) {
     tmp_mp = tmp_a->best;
     while(tmp_mp != NULL) {
       while(tmp_m != NULL) {
-        if(!strcmp(tmp_mp->title, tmp_m->title))
+        if(!strncmp(tmp_mp->title, tmp_m->title, strlen(tmp_m->title)))
           tmp_mp->mv_p = tmp_m;
 
         tmp_m = tmp_m->next;
@@ -531,7 +531,7 @@ void link_data(link *data) {
     tmp_mp = tmp_d->best;
     while(tmp_mp != NULL) {
       while(tmp_m != NULL) {
-        if(!strcmp(tmp_mp->title, tmp_m->title))
+        if(!strncmp(tmp_mp->title, tmp_m->title, strlen(tmp_m->title)))
           tmp_mp->mv_p = tmp_m;
 
         tmp_m = tmp_m->next;
@@ -586,14 +586,5 @@ void loading(link *data) {
   init_movie(data);
   init_actor(data);
   init_director(data);
-  //link_data(data);
-}
-
-char* space_edit(char *string) {
-  int i;
-  for(i=0; *(string+i) != '\n'; i++) {
-      *(string+i) = *(string+i+1);
-  }
-  //*(string+i) = '\0';
-  return string;
+  link_data(data);
 }

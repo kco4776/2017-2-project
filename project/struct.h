@@ -61,7 +61,6 @@ void add_moviep(movie_p **tmp, char *best_mv);
 void init_actor(link *data);
 void link_data(link *data);
 void loading(link *data);
-char* space_edit(char *string);
 void add_m(link *data);
 void add_d(link *data);
 void add_a(link *data);

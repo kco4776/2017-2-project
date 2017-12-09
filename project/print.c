@@ -23,7 +23,7 @@ void print_d(link *data, int num) {
       tmp = tmp->next;
     tmp_mp = tmp->best;
     printf("%d, %s, %c, %s\n", num, tmp->name, tmp->sex, tmp->birth);
-    for(int i=1; tmp_mp != NULL; i++) {
+    while(tmp_mp != NULL) {
       printf("%s, %s, %s\n", tmp_mp->title, mv_year_check(tmp_mp), mv_time_check(tmp_mp));
       tmp_mp = tmp_mp->next;
     }
