@@ -3,6 +3,7 @@
 void init_movie(link *data) {
   FILE *movie_log = fopen("movie_log", "r");
   actor_p *mv_ap;
+  movie *tmp_m;
 
   char *tag;
   tag = (char *)calloc(10, sizeof(char));
@@ -111,40 +112,41 @@ void init_movie(link *data) {
         }
 
         else {
-          while(data->mv->next != NULL)
-            data->mv->next = data->mv->next->next;
-
-            data->mv->next = (movie *)malloc(sizeof(movie));
-            data->mv->next->title = (char *)calloc(50, sizeof(char));
-            data->mv->next->genre = (char *)calloc(50, sizeof(char));
-            data->mv->next->mv_dir = (director_p *)malloc(sizeof(director_p));
-            data->mv->next->mv_dir->name = (char *)calloc(50, sizeof(char));
-            data->mv->next->mv_dir->dir_p = NULL;
-            data->mv->next->year = (char *)calloc(10, sizeof(char));
-            data->mv->next->time = (char *)calloc(4, sizeof(char));
-            data->mv->next->mv_act = (actor_p *)malloc(sizeof(actor_p));
-            data->mv->next->mv_act->name = (char *)calloc(50, sizeof(char));
-            data->mv->next->mv_act->act_p = NULL;
-            data->mv->next->mv_act->next = NULL;
-            data->mv->next->next = NULL;
+          tmp_m = data->mv;
+          while(tmp_m->next != NULL) {
+            tmp_m = tmp_m->next;
+          }
+            tmp_m->next = (movie *)malloc(sizeof(movie));
+            tmp_m->next->title = (char *)calloc(50, sizeof(char));
+            tmp_m->next->genre = (char *)calloc(50, sizeof(char));
+            tmp_m->next->mv_dir = (director_p *)malloc(sizeof(director_p));
+            tmp_m->next->mv_dir->name = (char *)calloc(50, sizeof(char));
+            tmp_m->next->mv_dir->dir_p = NULL;
+            tmp_m->next->year = (char *)calloc(10, sizeof(char));
+            tmp_m->next->time = (char *)calloc(4, sizeof(char));
+            tmp_m->next->mv_act = (actor_p *)malloc(sizeof(actor_p));
+            tmp_m->next->mv_act->name = (char *)calloc(50, sizeof(char));
+            tmp_m->next->mv_act->act_p = NULL;
+            tmp_m->next->mv_act->next = NULL;
+            tmp_m->next->next = NULL;
 
             fscanf(movie_log, "%[^:]", serial);
-            data->mv->next->serial = atoi(serial);
+            tmp_m->next->serial = atoi(serial);
             fseek(movie_log, 1, SEEK_CUR);
-            fscanf(movie_log, "%[^:]", data->mv->next->title);
+            fscanf(movie_log, "%[^:]", tmp_m->next->title);
             fseek(movie_log, 1, SEEK_CUR);
-            fscanf(movie_log, "%[^:]", data->mv->next->genre);
+            fscanf(movie_log, "%[^:]", tmp_m->next->genre);
             fseek(movie_log, 1, SEEK_CUR);
-            fscanf(movie_log, "%[^:]", data->mv->next->mv_dir->name);
+            fscanf(movie_log, "%[^:]", tmp_m->next->mv_dir->name);
             fseek(movie_log, 1, SEEK_CUR);
-            fscanf(movie_log, "%[^:]", data->mv->next->year);
+            fscanf(movie_log, "%[^:]", tmp_m->next->year);
             fseek(movie_log, 1, SEEK_CUR);
-            fscanf(movie_log, "%[^:]", data->mv->next->time);
+            fscanf(movie_log, "%[^:]", tmp_m->next->time);
             fseek(movie_log, 1, SEEK_CUR);
             fscanf(movie_log, "%[^\n]", names);
             name = strtok(names, ",");
-            strcpy(data->mv->next->mv_act->name, name);
-            mv_ap = data->mv->next->mv_act;
+            strcpy(tmp_m->next->mv_act->name, name);
+            mv_ap = tmp_m->next->mv_act;
             while(name = strtok(NULL, ",")) {
               add_actorp(&mv_ap, name);
             }
@@ -176,6 +178,7 @@ void init_movie(link *data) {
 void init_director(link *data) {
   FILE *director_log = fopen("director_log", "r");
   movie_p *tmp_mp;
+  director *tmp_d;
 
   char *tag;
   tag = (char *)calloc(10, sizeof(char));
@@ -265,31 +268,32 @@ void init_director(link *data) {
           best_mv = (char *)calloc(50, sizeof(char));
         }
         else {
-          while(data->dir->next != NULL)
-            data->dir->next = data->dir->next->next;
+          tmp_d = data->dir;
+          while(tmp_d->next != NULL)
+            tmp_d = tmp_d->next;
 
-            data->dir->next = (director *)malloc(sizeof(director));
-            data->dir->next->name = (char *)calloc(50, sizeof(char));
-            data->dir->next->birth = (char *)calloc(10, sizeof(char));
-            data->dir->next->best = (movie_p *)malloc(sizeof(movie_p));
-            data->dir->next->best->title = (char *)calloc(50, sizeof(char));
-            data->dir->next->best->mv_p = NULL;
-            data->dir->next->best->next = NULL;
-            data->dir->next->next = NULL;
+            tmp_d->next = (director *)malloc(sizeof(director));
+            tmp_d->next->name = (char *)calloc(50, sizeof(char));
+            tmp_d->next->birth = (char *)calloc(10, sizeof(char));
+            tmp_d->next->best = (movie_p *)malloc(sizeof(movie_p));
+            tmp_d->next->best->title = (char *)calloc(50, sizeof(char));
+            tmp_d->next->best->mv_p = NULL;
+            tmp_d->next->best->next = NULL;
+            tmp_d->next->next = NULL;
 
             fscanf(director_log, "%[^:]", serial);
-            data->dir->next->serial = atoi(serial);
+            tmp_d->next->serial = atoi(serial);
             fseek(director_log, 1, SEEK_CUR);
-            fscanf(director_log, "%[^:]", data->dir->next->name);
+            fscanf(director_log, "%[^:]", tmp_d->next->name);
             fseek(director_log, 1, SEEK_CUR);
-            fscanf(director_log, "%[^:]", &(data->dir->next->sex));
+            fscanf(director_log, "%[^:]", &(tmp_d->next->sex));
             fseek(director_log, 1, SEEK_CUR);
-            fscanf(director_log, "%[^:]", data->dir->next->birth);
+            fscanf(director_log, "%[^:]", tmp_d->next->birth);
             fseek(director_log, 1, SEEK_CUR);
             fscanf(director_log, "%[^\n]", best_mvs);
             best_mv = strtok(best_mvs, ",");
-            strcpy(data->dir->next->best->title, best_mv);
-            tmp_mp = data->dir->next->best;
+            strcpy(tmp_d->next->best->title, best_mv);
+            tmp_mp = tmp_d->next->best;
             while(best_mv = strtok(NULL, ",")) {
               add_moviep(&tmp_mp, best_mv);
             }
@@ -320,6 +324,7 @@ void init_director(link *data) {
 void init_actor(link *data) {
   FILE *actor_log = fopen("actor_log", "r");
   movie_p *tmp_mp;
+  actor *tmp_a;
 
   char *tag;
   tag = (char *)calloc(10, sizeof(char));
@@ -409,31 +414,32 @@ void init_actor(link *data) {
           best_mv = (char *)calloc(50, sizeof(char));
         }
         else {
-          while(data->act->next != NULL)
-            data->act->next = data->act->next->next;
+          tmp_a = data->act;
+          while(tmp_a->next != NULL)
+            tmp_a = tmp_a->next;
 
-            data->act->next = (actor *)malloc(sizeof(actor));
-            data->act->next->name = (char *)calloc(50, sizeof(char));
-            data->act->next->birth = (char *)calloc(10, sizeof(char));
-            data->act->next->best = (movie_p *)malloc(sizeof(movie_p));
-            data->act->next->best->title = (char *)calloc(50, sizeof(char));
-            data->act->next->best->mv_p = NULL;
-            data->act->next->best->next = NULL;
-            data->act->next->next = NULL;
+            tmp_a->next = (actor *)malloc(sizeof(actor));
+            tmp_a->next->name = (char *)calloc(50, sizeof(char));
+            tmp_a->next->birth = (char *)calloc(10, sizeof(char));
+            tmp_a->next->best = (movie_p *)malloc(sizeof(movie_p));
+            tmp_a->next->best->title = (char *)calloc(50, sizeof(char));
+            tmp_a->next->best->mv_p = NULL;
+            tmp_a->next->best->next = NULL;
+            tmp_a->next->next = NULL;
 
             fscanf(actor_log, "%[^:]", serial);
-            data->act->next->serial = atoi(serial);
+            tmp_a->next->serial = atoi(serial);
             fseek(actor_log, 1, SEEK_CUR);
-            fscanf(actor_log, "%[^:]", data->act->next->name);
+            fscanf(actor_log, "%[^:]", tmp_a->next->name);
             fseek(actor_log, 1, SEEK_CUR);
-            fscanf(actor_log, "%[^:]", &(data->act->next->sex));
+            fscanf(actor_log, "%[^:]", &(tmp_a->next->sex));
             fseek(actor_log, 1, SEEK_CUR);
-            fscanf(actor_log, "%[^:]", data->act->next->birth);
+            fscanf(actor_log, "%[^:]", tmp_a->next->birth);
             fseek(actor_log, 1, SEEK_CUR);
             fscanf(actor_log, "%[^\n]", best_mvs);
             best_mv = strtok(best_mvs, ",");
-            strcpy(data->act->next->best->title, best_mv);
-            tmp_mp = data->act->next->best;
+            strcpy(tmp_a->next->best->title, best_mv);
+            tmp_mp = tmp_a->next->best;
             while(best_mv = strtok(NULL, ",")) {
               add_moviep(&tmp_mp, best_mv);
             }
@@ -475,6 +481,7 @@ void link_data(link *data) {
 
       tmp_d = tmp_d->next;
     }
+    tmp_d = data->dir;
     tmp_m = tmp_m->next;
   }
 
@@ -491,6 +498,7 @@ void link_data(link *data) {
 
         tmp_a = tmp_a->next;
       }
+      tmp_a = data->act;
       tmp_ap = tmp_ap->next;
     }
     tmp_m = tmp_m->next;
@@ -509,6 +517,7 @@ void link_data(link *data) {
 
         tmp_m = tmp_m->next;
       }
+      tmp_m = data->mv;
       tmp_mp = tmp_mp->next;
     }
     tmp_a = tmp_a->next;
@@ -527,6 +536,7 @@ void link_data(link *data) {
 
         tmp_m = tmp_m->next;
       }
+      tmp_m = data->mv;
       tmp_mp = tmp_mp->next;
     }
     tmp_d = tmp_d->next;
@@ -576,5 +586,14 @@ void loading(link *data) {
   init_movie(data);
   init_actor(data);
   init_director(data);
-  link_data(data);
+  //link_data(data);
+}
+
+char* space_edit(char *string) {
+  int i;
+  for(i=0; *(string+i) != '\n'; i++) {
+      *(string+i) = *(string+i+1);
+  }
+  //*(string+i) = '\0';
+  return string;
 }

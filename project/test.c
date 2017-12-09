@@ -2,22 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-void init_m(char *string);
-
-int main(void) {
-  FILE *ip_m = fopen("movie_log", "r");
-  char tag[4];
-  char *string;
-  string = (char *)calloc(50, sizeof(char));
-  fgets(tag, 4, ip_m);
-  printf("tag:%s\n", tag);
-  if(!strcmp(tag, "add")) {
-    init_m(string);
-    printf("string:%s\n", string);
+char* space_edit(char *string) {
+  int i;
+  for(i=0; *(string+i) != '\n'; i++) {
+      *(string+i) = *(string+i+1);
   }
+  *(string+i) = '\0';
+  return string;
 }
 
-void init_m(char *string) {
-  FILE *ip_m = fopen("movie_log", "r");
-  fgets(string, 3, ip_m);
+int main(void) {
+  char *string;
+  string = (char *)calloc(50, sizeof(char));
+  printf("string:");
+  fgets(string, 50, stdin);
+  printf("string:%s\n", space_edit(string));
+  printf("finish");
 }

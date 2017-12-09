@@ -40,6 +40,12 @@ int main(void) {
       free(command);
       command = (char *)calloc(50, sizeof(char));
     }
+    else if(!strncmp(command, "print d", 7)) {
+      //print_d(data, *(command+8)-48);
+      printf("%s\n", data->dir->best->next->title);
+      free(command);
+      command = (char *)calloc(50, sizeof(char));
+    }
   } while(strcmp(command, "end\n"));
 
   return 0;
