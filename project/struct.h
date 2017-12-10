@@ -84,8 +84,9 @@ char* dir_birth_check(director_p *tmp_dp);
 char* mv_year_check(movie_p *tmp);
 char* mv_time_check(movie_p *tmp);
 
+void make_mvlist(void);
+void make_dirlist(void);
+void make_actlist();
+
 void ctrl_c(int sig);
-void movie_list();
-void director_list();
-void actor_list();
 int command_num(char *command);

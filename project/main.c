@@ -1,6 +1,5 @@
 #include "struct.h"
 
-
 int main(void) {
   link_d *data;
   data = (link_d *)malloc(sizeof(link_d));
@@ -14,9 +13,9 @@ int main(void) {
   printf(">> Welcome to My Movie <<\n");
   printf("File Loading.....\n");
   loading(data);
-  movie_list();
-  director_list();
-  actor_list();
+  make_mvlist();
+  make_actlist();
+  make_dirlist();
   printf("You can use add, update, delete, search, sort, save, end commands.\n");
 
   do {

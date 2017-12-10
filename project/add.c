@@ -30,7 +30,7 @@ void add_m(link_d *data) {  //영화 추가 함수
     fprintf(movie_log, "%s\n", delete_null(string));
     fclose(movie_log);
     loading(data);
-    movie_list();
+    make_mvlist();
   }
 }
 
@@ -58,7 +58,7 @@ void add_d(link_d *data) {   //영화 감독 추가 함수
     fprintf(director_log, "%s\n", delete_null(string));
     fclose(director_log);
     loading(data);
-    director_list();
+    make_dirlist();
   }
 }
 
@@ -86,7 +86,7 @@ void add_a(link_d *data) { //영화 배우 추가 함수
     fprintf(actor_log, "%s\n", delete_null(string));
     fclose(actor_log);
     loading(data);
-    actor_list();
+    make_actlist();
   }
 }
 

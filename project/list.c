@@ -1,19 +1,6 @@
 #include "struct.h"
 
-
-void ctrl_c(int sig) { //신호 처리를 위한 신호처리 함수
-  char *answer;
-  answer = (char *)calloc(10, sizeof(char));
-  printf("Control+C\n");
-  printf("Get Interrupt Signal\n");
-  printf("Do you want to exit myMOVIE program? (Y/N) ");
-  scanf("%s", answer);
-  if (*answer=='y' || *answer=='Y')
-    exit(1);
-}
-
-
-void movie_list() {  //영화 리스트를 만드는 함수
+void make_mvlist(void) {
   time_t timer;
   struct tm *t;
   int size; //파일 크기를 저장하기 위한 변수
@@ -45,31 +32,25 @@ void movie_list() {  //영화 리스트를 만드는 함수
   FILE *movie_log = fopen("movie_log", "r");
   FILE *movie_list = fopen("movie_list", "w");
 
-  char *string;
-  string = (char *)calloc(100, sizeof(char));
-  char *tag;
-  tag = (char *)calloc(100, sizeof(char));
-  char *serial;
-  serial = (char *)calloc(100, sizeof(char));
+  char *tag = (char *)calloc(10, sizeof(char));
+  char *string = (char *)calloc(200, sizeof(char));
+
+  fscanf(movie_log, "%[^:]", tag);
 
   while(fscanf(movie_log, "%[^:]", tag) != EOF) {
-
       if (!strcmp(tag, "add")) {
-
         fscanf(movie_log, "%[^\n]", string); //개행 나올 때까지 string에 저장
         fprintf(movie_list,"%s\n",string+1); // 제일 앞에 : 콜론을 제외한 내용 파일에 쓰기
         fseek(movie_log, 1, SEEK_CUR);
       }
-      else if(!strcmp(tag, "delete")) {
-
-      }
     }
     free(string);
+    string = (char *)calloc(200, sizeof(char));
     free(tag);
-    free(serial);
+    tag = (char *)calloc(10, sizeof(char));
 }
 
-void director_list() {  //감독 리스트를 만드는 함수
+void make_dirlist() {  //감독 리스트를 만드는 함수
   time_t timer;
   struct tm *t;
   int size; //파일 크기를 저장하기 위한 변수
@@ -105,8 +86,6 @@ void director_list() {  //감독 리스트를 만드는 함수
   string = (char *)calloc(100, sizeof(char));
   char *tag;
   tag = (char *)calloc(100, sizeof(char));
-  char *serial;
-  serial = (char *)calloc(100, sizeof(char));
 
   while(fscanf(director_log, "%[^:]", tag) != EOF) {
 
@@ -116,21 +95,15 @@ void director_list() {  //감독 리스트를 만드는 함수
         fprintf(director_list,"%s\n",string+1); // 제일 앞에 : 콜론을 제외한 내용 파일에 쓰기
         fseek(director_log, 1, SEEK_CUR);
       }
-      else if(!strcmp(tag, "delete")) {
-        fscanf(director_log,"%[^:]", serial);
-
-
-      }
     }
     fclose(director_log);
     fclose(director_list);
     free(string);
     free(tag);
-    free(serial);
 
 }
 
-void actor_list() {   // 배우 리스트를 만드는 함수
+void make_actlist() {   // 배우 리스트를 만드는 함수
   time_t timer;
   struct tm *t;
   int size; //파일 크기를 저장하기 위한 변수
@@ -166,8 +139,6 @@ void actor_list() {   // 배우 리스트를 만드는 함수
   string = (char *)calloc(100, sizeof(char));
   char *tag;
   tag = (char *)calloc(100, sizeof(char));
-  char *serial;
-  serial = (char *)calloc(100, sizeof(char));
 
   while(fscanf(actor_log, "%[^:]", tag) != EOF) {
 
@@ -177,25 +148,10 @@ void actor_list() {   // 배우 리스트를 만드는 함수
         fprintf(actor_list,"%s\n",string+1); // 제일 앞에 : 콜론을 제외한 내용 파일에 쓰기
         fseek(actor_log, 1, SEEK_CUR);
       }
-      else if(!strcmp(tag, "delete")) {
-        fscanf(actor_log,"%[^:]", serial);
-
-
-      }
     }
     fclose(actor_log);
     fclose(actor_list);
     free(string);
     free(tag);
-    free(serial);
 
-}
-
-int command_num(char *command) {   // 명령어 번호를 얻기 위해 문자열 자르기
-  char *string;
-  string = (char *)calloc(100, sizeof(char));
-  string = strtok(command, " ");
-  string = strtok(NULL, " ");
-  string = strtok(NULL, " ");
-  return atoi(string);
 }

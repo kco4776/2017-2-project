@@ -170,19 +170,7 @@ void init_movie(link_d *data) { //movie_log파일을 읽고 구조체에 저장.
     }
 
     else if(!strcmp(tag, "delete")) {
-      movie *tmp_m1;
-      tmp_m = data->mv;
 
-      fscanf(movie_log, "%[^:]", serial);
-
-      while(tmp_m->next != NULL) {
-        if (tmp_m->next->serial==atoi(serial)) {
-          tmp_m1 = tmp_m->next->next;
-          tmp_m->next = tmp_m1;
-          tmp_m->next = NULL;
-        }
-        tmp_m = tmp_m->next;
-      }
     }
 
   }
@@ -333,6 +321,7 @@ void init_director(link_d *data) { //director_log파일을 읽고 구조체에 �
     }
 
   }
+  fclose(director_log);
 }
 
 void init_actor(link_d *data) { //actor_log파일을 읽고 구조체에 저장.
@@ -479,6 +468,7 @@ void init_actor(link_d *data) { //actor_log파일을 읽고 구조체에 저장.
     }
 
   }
+  fclose(actor_log);
 }
 
 void link_data(link_d *data) { //같은 정보를 갖는 노드를 포인트.
