@@ -610,7 +610,6 @@ void loading(link_d *data) { //log파일 읽고 구조체에 저장.
   data->act = NULL;
   data->dir = NULL;
   init_movie(data);
-  //movie_list();
   init_actor(data);
   init_director(data);
   link_data(data);

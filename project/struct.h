@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <time.h>
+#include <unistd.h>
 
 typedef struct movie {
   int serial;
@@ -85,4 +86,6 @@ char* mv_time_check(movie_p *tmp);
 
 void ctrl_c(int sig);
 void movie_list();
+void director_list();
+void actor_list();
 int command_num(char *command);
