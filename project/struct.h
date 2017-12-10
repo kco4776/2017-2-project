@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <time.h>
 
 typedef struct movie {
   int serial;
@@ -73,3 +75,7 @@ char* act_birth_check(actor_p *tmp_ap);
 char* dir_birth_check(director_p *tmp_dp);
 char* mv_year_check(movie_p *tmp);
 char* mv_time_check(movie_p *tmp);
+void ctrl_c(int sig);
+void movie_list();
+int command_num(char *command);
+void delete_m(link *data, int num);

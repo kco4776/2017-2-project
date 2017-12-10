@@ -1,5 +1,6 @@
 #include "struct.h"
 
+
 int main(void) {
   link *data;
   data = (link *)malloc(sizeof(link));
@@ -14,8 +15,12 @@ int main(void) {
   printf("File Loading.....\n");
   loading(data);
   printf("You can use add, update, delete, search, sort, save, end commands.\n");
+
   do {
     printf("(movie) ");
+
+    signal(SIGINT, ctrl_c);
+
     fgets(command, 100, stdin);
 
     if(!strcmp(command, "add m\n")) {
@@ -36,16 +41,24 @@ int main(void) {
       command = (char *)calloc(50, sizeof(char));
     }
     else if(!strncmp(command, "print m", 7)) {
-      print_m(data, *(command+8)-48);
+      print_m(data, command_num(command));
       free(command);
       command = (char *)calloc(50, sizeof(char));
     }
     else if(!strncmp(command, "print d", 7)) {
-      print_d(data, *(command+8)-48);
+      print_d(data, command_num(command));
       free(command);
       command = (char *)calloc(50, sizeof(char));
     }
+    else if(!strncmp(command, "delete m", 8)) {
+      delete_m(data, command_num(command));
+      free(command);
+      command = (char *)calloc(50, sizeof(char));
+    }
+
   } while(strcmp(command, "end\n"));
+
+
 
   return 0;
 }

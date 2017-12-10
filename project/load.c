@@ -162,6 +162,7 @@ void init_movie(link *data) {
         }
 
       }
+
     }
 
     else if(!strcmp(tag, "update")) {
@@ -169,10 +170,23 @@ void init_movie(link *data) {
     }
 
     else if(!strcmp(tag, "delete")) {
+      movie *tmp_m1;
+      tmp_m = data->mv;
 
+      fscanf(movie_log, "%[^:]", serial);
+
+      while(tmp_m->next != NULL) {
+        if (tmp_m->next->serial==atoi(serial)) {
+          tmp_m1 = tmp_m->next->next;
+          tmp_m->next = tmp_m1;
+          tmp_m->next = NULL;
+        }
+        tmp_m = tmp_m->next;
+      }
     }
 
   }
+  fclose(movie_log);
 }
 
 void init_director(link *data) {
@@ -584,6 +598,7 @@ void add_moviep(movie_p **tmp, char *best_mv) {
 
 void loading(link *data) {
   init_movie(data);
+  movie_list();
   init_actor(data);
   init_director(data);
   link_data(data);
