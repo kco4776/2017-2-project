@@ -1,6 +1,6 @@
 #include "struct.h"
 
-void init_movie(link *data) {
+void init_movie(link_d *data) { //movie_log파일을 읽고 구조체에 저장.
   FILE *movie_log = fopen("movie_log", "r");
   actor_p *mv_ap;
   movie *tmp_m;
@@ -46,7 +46,7 @@ void init_movie(link *data) {
         fseek(movie_log, 1, SEEK_CUR);
         fscanf(movie_log, "%[^:]", data->mv->time);
         fseek(movie_log, 1, SEEK_CUR);
-        fscanf(movie_log, "%[^\n]", names);
+        fscanf(movie_log, "%[^\n\r]", names);
         name = strtok(names, ",");
         strcpy(data->mv->mv_act->name, name);
         mv_ap = data->mv->mv_act;
@@ -93,7 +93,7 @@ void init_movie(link *data) {
           fseek(movie_log, 1, SEEK_CUR);
           fscanf(movie_log, "%[^:]", data->mv->next->time);
           fseek(movie_log, 1, SEEK_CUR);
-          fscanf(movie_log, "%[^\n]", names);
+          fscanf(movie_log, "%[^\n\r]", names);
           name = strtok(names, ",");
           strcpy(data->mv->next->mv_act->name, name);
           mv_ap = data->mv->next->mv_act;
@@ -143,7 +143,7 @@ void init_movie(link *data) {
             fseek(movie_log, 1, SEEK_CUR);
             fscanf(movie_log, "%[^:]", tmp_m->next->time);
             fseek(movie_log, 1, SEEK_CUR);
-            fscanf(movie_log, "%[^\n]", names);
+            fscanf(movie_log, "%[^\n\r]", names);
             name = strtok(names, ",");
             strcpy(tmp_m->next->mv_act->name, name);
             mv_ap = tmp_m->next->mv_act;
@@ -189,7 +189,7 @@ void init_movie(link *data) {
   fclose(movie_log);
 }
 
-void init_director(link *data) {
+void init_director(link_d *data) { //director_log파일을 읽고 구조체에 저장.
   FILE *director_log = fopen("director_log", "r");
   movie_p *tmp_mp;
   director *tmp_d;
@@ -226,7 +226,7 @@ void init_director(link *data) {
         fseek(director_log, 1, SEEK_CUR);
         fscanf(director_log, "%[^:]", data->dir->birth);
         fseek(director_log, 1, SEEK_CUR);
-        fscanf(director_log, "%[^\n]", best_mvs);
+        fscanf(director_log, "%[^\n\r]", best_mvs);
         best_mv = strtok(best_mvs, ",");
         strcpy(data->dir->best->title, best_mv);
         tmp_mp = data->dir->best;
@@ -264,7 +264,7 @@ void init_director(link *data) {
           fseek(director_log, 1, SEEK_CUR);
           fscanf(director_log, "%[^:]", data->dir->next->birth);
           fseek(director_log, 1, SEEK_CUR);
-          fscanf(director_log, "%[^\n]", best_mvs);
+          fscanf(director_log, "%[^\n\r]", best_mvs);
           best_mv = strtok(best_mvs, ",");
           strcpy(data->dir->next->best->title, best_mv);
           tmp_mp = data->dir->next->best;
@@ -304,7 +304,7 @@ void init_director(link *data) {
             fseek(director_log, 1, SEEK_CUR);
             fscanf(director_log, "%[^:]", tmp_d->next->birth);
             fseek(director_log, 1, SEEK_CUR);
-            fscanf(director_log, "%[^\n]", best_mvs);
+            fscanf(director_log, "%[^\n\r]", best_mvs);
             best_mv = strtok(best_mvs, ",");
             strcpy(tmp_d->next->best->title, best_mv);
             tmp_mp = tmp_d->next->best;
@@ -335,7 +335,7 @@ void init_director(link *data) {
   }
 }
 
-void init_actor(link *data) {
+void init_actor(link_d *data) { //actor_log파일을 읽고 구조체에 저장.
   FILE *actor_log = fopen("actor_log", "r");
   movie_p *tmp_mp;
   actor *tmp_a;
@@ -372,7 +372,7 @@ void init_actor(link *data) {
         fseek(actor_log, 1, SEEK_CUR);
         fscanf(actor_log, "%[^:]", data->act->birth);
         fseek(actor_log, 1, SEEK_CUR);
-        fscanf(actor_log, "%[^\n]", best_mvs);
+        fscanf(actor_log, "%[^\n\r]", best_mvs);
         best_mv = strtok(best_mvs, ",");
         strcpy(data->act->best->title, best_mv);
         tmp_mp = data->act->best;
@@ -410,7 +410,7 @@ void init_actor(link *data) {
           fseek(actor_log, 1, SEEK_CUR);
           fscanf(actor_log, "%[^:]", data->act->next->birth);
           fseek(actor_log, 1, SEEK_CUR);
-          fscanf(actor_log, "%[^\n]", best_mvs);
+          fscanf(actor_log, "%[^\n\r]", best_mvs);
           best_mv = strtok(best_mvs, ",");
           strcpy(data->act->next->best->title, best_mv);
           tmp_mp = data->act->next->best;
@@ -450,7 +450,7 @@ void init_actor(link *data) {
             fseek(actor_log, 1, SEEK_CUR);
             fscanf(actor_log, "%[^:]", tmp_a->next->birth);
             fseek(actor_log, 1, SEEK_CUR);
-            fscanf(actor_log, "%[^\n]", best_mvs);
+            fscanf(actor_log, "%[^\n\r]", best_mvs);
             best_mv = strtok(best_mvs, ",");
             strcpy(tmp_a->next->best->title, best_mv);
             tmp_mp = tmp_a->next->best;
@@ -481,7 +481,7 @@ void init_actor(link *data) {
   }
 }
 
-void link_data(link *data) {
+void link_data(link_d *data) { //같은 정보를 갖는 노드를 포인트.
   movie *tmp_m = data->mv;
   actor *tmp_a = data->act;
   director *tmp_d = data->dir;
@@ -522,25 +522,6 @@ void link_data(link *data) {
   tmp_a = data->act;
   tmp_d = data->dir;
 
-  while(tmp_a != NULL) {
-    tmp_mp = tmp_a->best;
-    while(tmp_mp != NULL) {
-      while(tmp_m != NULL) {
-        if(!strncmp(tmp_mp->title, tmp_m->title, strlen(tmp_m->title)))
-          tmp_mp->mv_p = tmp_m;
-
-        tmp_m = tmp_m->next;
-      }
-      tmp_m = data->mv;
-      tmp_mp = tmp_mp->next;
-    }
-    tmp_a = tmp_a->next;
-  }
-
-  tmp_m = data->mv;
-  tmp_a = data->act;
-  tmp_d = data->dir;
-
   while(tmp_d != NULL) {
     tmp_mp = tmp_d->best;
     while(tmp_mp != NULL) {
@@ -556,9 +537,33 @@ void link_data(link *data) {
     tmp_d = tmp_d->next;
   }
 
+  tmp_m = data->mv;
+  tmp_a = data->act;
+  tmp_d = data->dir;
+
+  while(tmp_a != NULL) {
+    tmp_mp = tmp_a->best;
+    while(tmp_mp != NULL) {
+      while(tmp_m != NULL) {
+        if(!strncmp(tmp_mp->title, tmp_m->title, strlen(tmp_m->title))) {
+          tmp_mp->mv_p = tmp_m;
+          break;
+        }
+
+        tmp_m = tmp_m->next;
+      }
+      tmp_m = data->mv;
+      tmp_mp = tmp_mp->next;
+    }
+    tmp_a = tmp_a->next;
+  }
+
+  tmp_m = data->mv;
+  tmp_a = data->act;
+  tmp_d = data->dir;
 }
 
-void add_actorp(actor_p **tmp, char *actor) {
+void add_actorp(actor_p **tmp, char *actor) { //actor를 linked list에 저장.
   if((*tmp)->next == NULL) {
     (*tmp)->next = (actor_p *)malloc(sizeof(actor_p));
     (*tmp)->next->name = (char *)calloc(50, sizeof(char));
@@ -578,10 +583,11 @@ void add_actorp(actor_p **tmp, char *actor) {
   (*tmp) = (*tmp)->next;
 }
 
-void add_moviep(movie_p **tmp, char *best_mv) {
+void add_moviep(movie_p **tmp, char *best_mv) {//movie를 linked list에 저장.
   if((*tmp)->next == NULL) {
     (*tmp)->next = (movie_p *)malloc(sizeof(movie_p));
     (*tmp)->next->title = (char *)calloc(50, sizeof(char));
+    (*tmp)->next->mv_p = NULL;
     (*tmp)->next->next = NULL;
     strcpy((*tmp)->next->title, best_mv);
   }
@@ -590,15 +596,21 @@ void add_moviep(movie_p **tmp, char *best_mv) {
       (*tmp)->next = (*tmp)->next->next;
       (*tmp)->next = (movie_p *)malloc(sizeof(movie_p));
       (*tmp)->next->title = (char *)calloc(50, sizeof(char));
+      (*tmp)->next->mv_p = NULL;
       (*tmp)->next->next = NULL;
       strcpy((*tmp)->next->title, best_mv);
   }
   (*tmp) = (*tmp)->next;
 }
 
-void loading(link *data) {
+void loading(link_d *data) { //log파일 읽고 구조체에 저장.
+  free(data);
+  data = (link_d *)malloc(sizeof(link_d));
+  data->mv = NULL;
+  data->act = NULL;
+  data->dir = NULL;
   init_movie(data);
-  movie_list();
+  //movie_list();
   init_actor(data);
   init_director(data);
   link_data(data);

@@ -50,32 +50,39 @@ typedef struct director_p {
   struct director *dir_p;
 } director_p;
 
-typedef struct link {
+typedef struct link_d {
   struct movie *mv;
   struct actor *act;
   struct director *dir;
-} link;
+} link_d;
 
-void init_movie(link *data);
+void init_movie(link_d *data);
 void add_actorp(actor_p **tmp, char *actor);
-void init_director(link *data);
+void init_director(link_d *data);
 void add_moviep(movie_p **tmp, char *best_mv);
-void init_actor(link *data);
-void link_data(link *data);
-void loading(link *data);
-void add_m(link *data);
-void add_d(link *data);
-void add_a(link *data);
+void init_actor(link_d *data);
+void link_data(link_d *data);
+void loading(link_d *data);
+
+void add_m(link_d *data);
+void add_d(link_d *data);
+void add_a(link_d *data);
+int check_mv_record(link_d *data, char *string);
+int check_act_record(link_d *data, char *string);
+int check_dir_record(link_d *data, char *string);
 char *delete_null(char *string);
 char *get_data(char *p);
-int count_serial(link *data, int mode);
-void print_m(link *data, int num);
-void print_d(link *data, int num);
+int count_serial(link_d *data, int mode);
+char *replaceAll(char *s, const char *olds, const char *news);
+
+void print_m(link_d *data, int num);
+void print_d(link_d *data, int num);
+void print_a(link_d *data, int num);
 char* act_birth_check(actor_p *tmp_ap);
 char* dir_birth_check(director_p *tmp_dp);
 char* mv_year_check(movie_p *tmp);
 char* mv_time_check(movie_p *tmp);
+
 void ctrl_c(int sig);
 void movie_list();
 int command_num(char *command);
-void delete_m(link *data, int num);
